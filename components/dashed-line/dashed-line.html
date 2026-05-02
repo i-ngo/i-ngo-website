@@ -1,0 +1,8 @@
+<div class="text-muted-foreground relative {% if is_horizontal %}h-px w-full{% else %}h-full w-px{% endif %} {{ class_name }}">
+  <div class="{% if is_horizontal %}
+      h-px w-full bg-[repeating-linear-gradient(90deg,transparent,transparent_4px,currentColor_4px,currentColor_10px)] [mask-image:linear-gradient(90deg,transparent,black_25%,black_75%,transparent)]
+    {% else %}
+      h-full w-px bg-[repeating-linear-gradient(180deg,transparent,transparent_4px,currentColor_4px,currentColor_10px)] [mask-image:linear-gradient(180deg,transparent,black_25%,black_75%,transparent)]
+    {% endif %}">
+  </div>
+</div>

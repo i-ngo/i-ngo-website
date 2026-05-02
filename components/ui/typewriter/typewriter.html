@@ -1,0 +1,43 @@
+<span 
+    x-data="{
+        text: '',
+        phrases: {{ phrases|safe }},
+        phraseIndex: 0,
+        charIndex: 0,
+        isDeleting: false,
+        typeSpeed: 100,
+        deleteSpeed: 50,
+        pauseEnd: 2000,
+        pauseStart: 500,
+        
+        type() {
+            const currentPhrase = this.phrases[this.phraseIndex];
+            
+            if (this.isDeleting) {
+                this.text = currentPhrase.substring(0, this.charIndex - 1);
+                this.charIndex--;
+            } else {
+                this.text = currentPhrase.substring(0, this.charIndex + 1);
+                this.charIndex++;
+            }
+            
+            let speed = this.isDeleting ? this.deleteSpeed : this.typeSpeed;
+            
+            if (!this.isDeleting && this.text === currentPhrase) {
+                speed = this.pauseEnd;
+                this.isDeleting = true;
+            } else if (this.isDeleting && this.text === '') {
+                this.isDeleting = false;
+                this.phraseIndex = (this.phraseIndex + 1) % this.phrases.length;
+                speed = this.pauseStart;
+            }
+            
+            setTimeout(() => this.type(), speed);
+        }
+    }"
+    x-init="setTimeout(() => type(), pauseStart)"
+    class="inline"
+>
+
+    <span x-text="'\u200B' + text" class="text-neutral-600 font-medium"></span>
+</span>

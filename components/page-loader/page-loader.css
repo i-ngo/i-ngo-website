@@ -1,0 +1,47 @@
+.skip-loader #page-loader-overlay {
+  display: none !important;
+}
+
+#page-loader-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #ffffff;
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: opacity 0.8s ease-in-out, visibility 0.8s ease-in-out;
+}
+
+#page-loader-overlay.fade-out {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.draw-svg {
+  max-width: 80%;
+  height: auto;
+}
+
+.draw-svg path {
+  stroke: #241f31;
+  stroke-width: 2;
+  fill: transparent;
+  stroke-dasharray: 20;
+  stroke-dashoffset: 100;
+  animation: draw 3s ease infinite;
+  transition: fill 1s ease-in-out, stroke-width 1s ease-in-out;
+}
+
+@keyframes draw {
+  0% { stroke-dashoffset: 100; }
+  100% { stroke-dashoffset: 0; }
+}
+
+.draw-svg.is-loaded path {
+  fill: #241f31;
+  stroke-width: 0; 
+}
