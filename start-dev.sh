@@ -1,2 +1,5 @@
 #!/bin/sh
-uv run uvicorn config.wsgi:application --host 0.0.0.0 --port 8000
+uv run gunicorn config.asgi:application \
+  --bind 0.0.0.0:8000 \
+  --workers 2 \
+  --worker-class uvicorn.workers.UvicornWorker
