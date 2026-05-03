@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.views import View
-from landing.models import YoutubeHistory, GithubHistory
+from landing.models import YoutubeHistory, GithubHistory, Project
 from django.core.paginator import Paginator
 
 def landing_page(request):
@@ -27,7 +27,18 @@ def feed_page(request):
 	return render(request, "feed.html", context)
 
 def projects_page(request):
-	return render(request, "projects.html")
+	project_qs = Project.objects.order_by('-id')
+	
+	project_paginator = Paginator(project_qs, 9)
+	
+	prj_page_number = request.GET.get('project_page', 1)
+	
+	project_page = project_paginator.get_page(prj_page_number)
+	
+	context = {
+		"project_page": project_page,
+	}
+	return render(request, "projects.html", context)
 
 def contact_page(request):
 	return render(request, "contact.html")

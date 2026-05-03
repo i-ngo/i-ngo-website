@@ -13,7 +13,7 @@ class Project(models.Model):
 	project_name = models.CharField(max_length=255)
 	project_url = models.CharField(max_length=255)
 	project_photo = models.ImageField(upload_to="project_imgs")
-	project_description = models.CharField(max_length=255)
+	project_description = models.CharField(max_length=178)
 	
 	def __str__(self):
 		return self.project_name

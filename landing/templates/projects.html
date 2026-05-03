@@ -3,5 +3,68 @@
 {% block title %}Projects{% endblock %}
 
 {% block content %}
-{% endblock content %}
+<section class="py-12 md:py-24 lg:py-32 w-full">
+  <div class="container mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+    
+    <div class="border border-black/15 bg-[#F8F4E9] p-5 sm:p-6 md:p-8 dark:border-white/15 dark:bg-[#242124]">
+      <h3 class="block text-[11px] font-semibold uppercase tracking-[0.24em] text-black/65 dark:text-white/65 mb-6">
+        Project Portfolio
+      </h3>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {% for project in project_page %}
+        <a href="{{ project.project_url }}">
+          <div class="block p-4 border border-black/20 dark:border-white/20 rounded-xl transition hover:bg-black/5 dark:hover:bg-white/5 space-y-3 flex flex-col h-full">
+            {% if project.project_photo %}
+              <img src="{{ project.project_photo.url }}" alt="{{ project.project_name }}" class="w-full h-40 object-cover rounded border border-black/10 dark:border-white/10" />
+            {% endif %}
+            
+            <div class="flex-grow">
+              <h2 class="text-[15px] font-bold text-black dark:text-white mb-2">
+                {{ project.project_name }}
+              </h2>
+              <p class="text-sm text-black/70 dark:text-white/70">
+                {{ project.project_description }}
+              </p>
+            </div>
+          </div>
+          </a>
+        {% empty %}
+          <div class="text-sm text-black/70 dark:text-white/70 col-span-full text-center py-10">
+            No projects available in the database.
+          </div>
+        {% endfor %}
+      </div>
 
+      <div class="mt-8 pt-5 border-t border-black/10 dark:border-white/10 flex flex-wrap items-center justify-between text-[11px] font-semibold uppercase tracking-[0.15em] text-black/65 dark:text-white/65 gap-2">
+        <div class="flex gap-2">
+          {% if project_page.has_previous %}
+            <a href="?project_page=1" class="transition hover:text-[var(--color-blueiris)]">First</a>
+            <span class="opacity-40">|</span>
+            <a href="?project_page={{ project_page.previous_page_number }}" class="transition hover:text-[var(--color-blueiris)]">Prev</a>
+          {% else %}
+            <span class="opacity-30">First</span>
+            <span class="opacity-30">|</span>
+            <span class="opacity-30">Prev</span>
+          {% endif %}
+        </div>
+        
+        <div>Page {{ project_page.number }} of {{ project_page.paginator.num_pages }}</div>
+        
+        <div class="flex gap-2">
+          {% if project_page.has_next %}
+            <a href="?project_page={{ project_page.next_page_number }}" class="transition hover:text-[var(--color-blueiris)]">Next</a>
+            <span class="opacity-40">|</span>
+            <a href="?project_page={{ project_page.paginator.num_pages }}" class="transition hover:text-[var(--color-blueiris)]">Last</a>
+          {% else %}
+            <span class="opacity-30">Next</span>
+            <span class="opacity-30">|</span>
+            <span class="opacity-30">Last</span>
+          {% endif %}
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+{% endblock content %}

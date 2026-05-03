@@ -1,4 +1,4 @@
 from django.contrib import admin
+from landing.models import Project
 
-# Register your models here.
-# TODO: Implement projects model
+admin.site.register(Project)
