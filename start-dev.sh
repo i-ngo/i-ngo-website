@@ -1,5 +1,2 @@
 #!/bin/sh
-uv run gunicorn config.asgi:application \
-  --bind 0.0.0.0:8000 \
-  --workers 2 \
-  --worker-class uvicorn.workers.UvicornWorker
+gunicorn config.asgi_wsgi:application -k uvicorn.workers.UvicornWorker -w 2 -b 0.0.0.0:8000
