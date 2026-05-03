@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
     const themeBtn = document.getElementById("theme-toggle-btn");
-    
+
     if (!themeBtn) return;
 
     themeBtn.addEventListener("click", () => {

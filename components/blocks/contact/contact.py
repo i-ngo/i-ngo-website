@@ -1,5 +1,4 @@
 from django_components import Component, register
-# TODO: Mobile view needs correction elements shift out of bounds
 @register("contact")
 class Contact(Component):
     template_file = "contact.html"

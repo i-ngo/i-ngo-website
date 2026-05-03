@@ -4,124 +4,143 @@
 {% block title %}Feed{% endblock %}
 
 {% block content %}
-<section class="py-12 md:py-24 lg:py-32 w-full">
+<section class="py-16 md:py-28 lg:py-32 lg:pt-44 w-full">
   <div class="container mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
 
     <!-- Feeds -->
     <div class="grid gap-10 lg:gap-8 lg:grid-cols-2 lg:items-stretch">
-      
+
       <!-- YouTube -->
-      <div class="border border-black/15 bg-[#F8F4E9] p-5 sm:p-6 md:p-8 dark:border-white/15 dark:bg-[#242124] flex flex-col h-full">
+      <div
+        class="border backdrop-blur-lg border-black/15 bg-[#F8F4E9]/20 p-5 sm:p-6 md:p-8 dark:border-white/15 dark:bg-[#242124]/20 flex flex-col h-full">
         <h3 class="block text-[11px] font-semibold uppercase tracking-[0.24em] text-black/65 dark:text-white/65 mb-6">
           YouTube Feed
         </h3>
-        
-         <div class="space-y-5 flex-grow">
+
+        <div class="space-y-5 flex-grow">
           {% for video in youtube_page %}
-            <a href="https://www.youtube.com/watch?v={{ video.video_id }}" class="block p-4 border border-black/20 dark:border-white/20 rounded-xl transition hover:bg-black/5 dark:hover:bg-white/5 space-y-3">
-              {% if video.thumbnail_url %}
-                <img src="{{ video.thumbnail_url }}" alt="{{ video.title }}" class="w-full rounded border border-black/10 dark:border-white/10" />
-              {% endif %}
-              <p class="text-[15px] font-medium text-black dark:text-white">
-                {{ video.title }}
-              </p>
-              <div class="flex flex-col gap-1 text-[11px] font-semibold uppercase tracking-[0.1em] text-black/50 dark:text-white/50">
-                <span>{{ video.uploaded_at }}</span>
-              </div>
-            </a>
-          {% empty %}
-            <div class="text-sm text-black/70 dark:text-white/70">
-              No videos found in the database.
+          <a href="https://www.youtube.com/watch?v={{ video.video_id }}"
+            class="block p-4 border border-black/20 dark:border-white/20 bg-[#F8F4E9] dark:bg-[#242124] rounded-xl transition hover:bg-black/5 dark:hover:bg-white/5 space-y-3">
+            {% if video.thumbnail_url %}
+            <img src="{{ video.thumbnail_url }}" alt="{{ video.title }}"
+              class="w-full rounded border border-black/10 dark:border-white/10" />
+            {% endif %}
+            <p class="text-[15px] font-medium text-black dark:text-white">
+              {{ video.title }}
+            </p>
+            <div
+              class="flex flex-col gap-1 text-[11px] font-semibold uppercase tracking-[0.1em] text-black/50 dark:text-white/50">
+              <span>{{ video.uploaded_at }}</span>
             </div>
+          </a>
+          {% empty %}
+          <div class="text-sm text-black/70 dark:text-white/70">
+            No videos found in the database.
+          </div>
           {% endfor %}
         </div>
 
-        <div class="mt-8 pt-5 border-t border-black/10 dark:border-white/10 flex flex-wrap items-center justify-between text-[11px] font-semibold uppercase tracking-[0.15em] text-black/65 dark:text-white/65 gap-2">
+        <div
+          class="mt-8 pt-5 border-t border-black/10 dark:border-white/10 flex flex-wrap items-center justify-between text-[11px] font-semibold uppercase tracking-[0.15em] text-black/65 dark:text-white/65 gap-2">
           <div class="flex gap-2">
             {% if youtube_page.has_previous %}
-              <a href="?yt_page=1&gh_page={{ github_page.number }}" class="transition hover:text-[var(--color-blueiris)]">First</a>
-              <span class="opacity-40">|</span>
-              <a href="?yt_page={{ youtube_page.previous_page_number }}&gh_page={{ github_page.number }}" class="transition hover:text-[var(--color-blueiris)]">Prev</a>
+            <a href="?yt_page=1&gh_page={{ github_page.number }}"
+              class="hidden sm:inline transition hover:text-[var(--color-blueiris)]">First</a>
+            <span class="hidden sm:inline opacity-40">|</span>
+            <a href="?yt_page={{ youtube_page.previous_page_number }}&gh_page={{ github_page.number }}"
+              class="transition hover:text-[var(--color-blueiris)]">Prev</a>
             {% else %}
-              <span class="opacity-30">First</span>
-              <span class="opacity-30">|</span>
-              <span class="opacity-30">Prev</span>
+            <span class="hidden sm:inline opacity-30">First</span>
+            <span class="hidden sm:inline opacity-30">|</span>
+            <span class="opacity-30">Prev</span>
             {% endif %}
           </div>
-          
-          <div>Page {{ youtube_page.number }} of {{ youtube_page.paginator.num_pages }}</div>
-          
+
+          <div class="shrink-0">Page {{ youtube_page.number }} of {{ youtube_page.paginator.num_pages }}</div>
+
           <div class="flex gap-2">
             {% if youtube_page.has_next %}
-              <a href="?yt_page={{ youtube_page.next_page_number }}&gh_page={{ github_page.number }}" class="transition hover:text-[var(--color-blueiris)]">Next</a>
-              <span class="opacity-40">|</span>
-              <a href="?yt_page={{ youtube_page.paginator.num_pages }}&gh_page={{ github_page.number }}" class="transition hover:text-[var(--color-blueiris)]">Last</a>
+            <a href="?yt_page={{ youtube_page.next_page_number }}&gh_page={{ github_page.number }}"
+              class="transition hover:text-[var(--color-blueiris)]">Next</a>
+            <span class="hidden sm:inline opacity-40">|</span>
+            <a href="?yt_page={{ youtube_page.paginator.num_pages }}&gh_page={{ github_page.number }}"
+              class="hidden sm:inline transition hover:text-[var(--color-blueiris)]">Last</a>
             {% else %}
-              <span class="opacity-30">Next</span>
-              <span class="opacity-30">|</span>
-              <span class="opacity-30">Last</span>
+            <span class="opacity-30">Next</span>
+            <span class="hidden sm:inline opacity-30">|</span>
+            <span class="hidden sm:inline opacity-30">Last</span>
             {% endif %}
           </div>
         </div>
       </div>
 
       <!-- GitHub -->
-      <div class="border border-black/15 bg-[#F8F4E9] p-5 sm:p-6 md:p-8 dark:border-white/15 dark:bg-[#242124] flex flex-col h-full">
+      <div
+        class="border border-black/15 backdrop-blur-lg bg-[#F8F4E9]/20 p-5 sm:p-6 md:p-8 dark:border-white/15 dark:bg-[#242124]/20 flex flex-col h-full">
         <h3 class="block text-[11px] font-semibold uppercase tracking-[0.24em] text-black/65 dark:text-white/65 mb-6">
           GitHub Feed
         </h3>
-        
+
         <div class="space-y-5 flex-grow">
           {% for commit in github_page %}
-            <div class="block p-4 border border-black/20 dark:border-white/20 rounded-xl transition hover:bg-black/5 dark:hover:bg-white/5 space-y-3">
-              <div class="flex items-center justify-between gap-4">
-                 <a href="{{ commit.repo_url }}" class="text-[11px] font-bold uppercase tracking-[0.1em] text-black/70 dark:text-white/70 transition hover:text-[var(--color-blueiris)]">
-                   {{ commit.repo_name }}
-                 </a>
-                 <span class="text-[10px] uppercase tracking-widest text-black/40 dark:text-white/40">
-                   {{ commit.uploaded_at }}
-                 </span>
-              </div>
-              <a href="{{ commit.commit_url }}" class="block text-sm font-medium text-black dark:text-white transition hover:text-[var(--color-blueiris)] break-words">
-                {{ commit.message }}
+          <div
+            class="block bg-[#F8F4E9] dark:bg-[#242124] p-4 border border-black/20 dark:border-white/20 rounded-xl transition hover:bg-black/5 dark:hover:bg-white/5 space-y-3">
+            <div class="flex items-center justify-between gap-4">
+              <a href="{{ commit.repo_url }}"
+                class="text-[11px] font-bold uppercase tracking-[0.1em] text-black/70 dark:text-white/70 transition hover:text-[var(--color-blueiris)]">
+                {{ commit.repo_name }}
               </a>
-              <div>
-                <span class="inline-block px-3 py-1 text-[11px] font-mono text-black/60 dark:text-white/60 border border-black/20 dark:border-white/20 rounded-full bg-black/5 dark:bg-white/5">
-                  {{ commit.commit_id }}
-                </span>
-              </div>
+              <span class="text-[10px] uppercase tracking-widest text-black/40 dark:text-white/40">
+                {{ commit.uploaded_at }}
+              </span>
             </div>
+            <a href="{{ commit.commit_url }}"
+              class="block text-sm font-medium text-black dark:text-white transition hover:text-[var(--color-blueiris)] break-words">
+              {{ commit.message }}
+            </a>
+            <div>
+              <span
+                class="inline-flex items-center justify-center px-3 py-1 text-[11px] leading-none font-mono text-black/60 dark:text-white/60 border border-black/20 dark:border-white/20 rounded-full bg-black/5 dark:bg-white/5">
+                {{ commit.commit_id }}
+              </span>
+            </div>
+          </div>
           {% empty %}
-            <div class="text-sm text-black/70 dark:text-white/70">
-              No commits found in the database.
-            </div>
+          <div class="text-sm text-black/70 dark:text-white/70">
+            No commits found in the database.
+          </div>
           {% endfor %}
         </div>
 
-        <div class="mt-8 pt-5 border-t border-black/10 dark:border-white/10 flex flex-wrap items-center justify-between text-[11px] font-semibold uppercase tracking-[0.15em] text-black/65 dark:text-white/65 gap-2">
+        <div
+          class="mt-8 pt-5 border-t border-black/10 dark:border-white/10 flex flex-wrap items-center justify-between text-[11px] font-semibold uppercase tracking-[0.15em] text-black/65 dark:text-white/65 gap-2">
           <div class="flex gap-2">
             {% if github_page.has_previous %}
-              <a href="?gh_page=1&yt_page={{ youtube_page.number }}" class="transition hover:text-[var(--color-blueiris)]">First</a>
-              <span class="opacity-40">|</span>
-              <a href="?gh_page={{ github_page.previous_page_number }}&yt_page={{ youtube_page.number }}" class="transition hover:text-[var(--color-blueiris)]">Prev</a>
+            <a href="?gh_page=1&yt_page={{ youtube_page.number }}"
+              class="hidden sm:inline transition hover:text-[var(--color-blueiris)]">First</a>
+            <span class="hidden sm:inline opacity-40">|</span>
+            <a href="?gh_page={{ github_page.previous_page_number }}&yt_page={{ youtube_page.number }}"
+              class="transition hover:text-[var(--color-blueiris)]">Prev</a>
             {% else %}
-              <span class="opacity-30">First</span>
-              <span class="opacity-30">|</span>
-              <span class="opacity-30">Prev</span>
+            <span class="hidden sm:inline opacity-30">First</span>
+            <span class="hidden sm:inline opacity-30">|</span>
+            <span class="opacity-30">Prev</span>
             {% endif %}
           </div>
-          
-          <div>Page {{ github_page.number }} of {{ github_page.paginator.num_pages }}</div>
-          
+
+          <div class="shrink-0">Page {{ github_page.number }} of {{ github_page.paginator.num_pages }}</div>
+
           <div class="flex gap-2">
             {% if github_page.has_next %}
-              <a href="?gh_page={{ github_page.next_page_number }}&yt_page={{ youtube_page.number }}" class="transition hover:text-[var(--color-blueiris)]">Next</a>
-              <span class="opacity-40">|</span>
-              <a href="?gh_page={{ github_page.paginator.num_pages }}&yt_page={{ youtube_page.number }}" class="transition hover:text-[var(--color-blueiris)]">Last</a>
+            <a href="?gh_page={{ github_page.next_page_number }}&yt_page={{ youtube_page.number }}"
+              class="transition hover:text-[var(--color-blueiris)]">Next</a>
+            <span class="hidden sm:inline opacity-40">|</span>
+            <a href="?gh_page={{ github_page.paginator.num_pages }}&yt_page={{ youtube_page.number }}"
+              class="hidden sm:inline transition hover:text-[var(--color-blueiris)]">Last</a>
             {% else %}
-              <span class="opacity-30">Next</span>
-              <span class="opacity-30">|</span>
-              <span class="opacity-30">Last</span>
+            <span class="opacity-30">Next</span>
+            <span class="hidden sm:inline opacity-30">|</span>
+            <span class="hidden sm:inline opacity-30">Last</span>
             {% endif %}
           </div>
         </div>

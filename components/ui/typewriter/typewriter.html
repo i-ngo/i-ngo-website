@@ -1,5 +1,4 @@
-<span 
-    x-data="{
+<span x-data="{
         text: '',
         phrases: {{ phrases|safe }},
         phraseIndex: 0,
@@ -34,10 +33,7 @@
             
             setTimeout(() => this.type(), speed);
         }
-    }"
-    x-init="setTimeout(() => type(), pauseStart)"
-    class="inline"
->
+    }" x-init="setTimeout(() => type(), pauseStart)" class="inline">
 
-    <span x-text="'\u200B' + text" class="text-neutral-600 font-medium"></span>
+    <span x-text="'\u200B' + text" class="text-neutral-600 dark:text-neutral-300 font-medium"></span>
 </span>

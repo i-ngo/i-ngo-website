@@ -1,11 +1,11 @@
 {% if as_child %}
-    <span class="{{ final_classes }}" data-slot="button"
-      {% for key, value in extra_props.items %} {{ key }}="{{ value }}"{% endfor %}>
-        {% slot "default" %}{% endslot %}
-    </span>
+<span class="{{ final_classes }}" data-slot="button" {% for key, value in extra_props.items %} {{ key }}="{{ value }}"
+  {% endfor %}>
+  {% slot "default" %}{% endslot %}
+</span>
 {% else %}
-    <button class="{{ final_classes }}" data-slot="button" 
-      {% for key, value in extra_props.items %} {{ key }}="{{ value }}"{% endfor %}>
-        {% slot "default" %}{% endslot %}
-    </button>
+<button class="{{ final_classes }}" data-slot="button" {% for key, value in extra_props.items %} {{ key }}="{{ value }}"
+  {% endfor %}>
+  {% slot "default" %}{% endslot %}
+</button>
 {% endif %}

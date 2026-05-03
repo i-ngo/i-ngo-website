@@ -1,6 +1,5 @@
 from django_components import Component, register
 
-# TODO: Decide on dark mode theme, then come back and do ts
 @register("page-loader")
 class Pageloader(Component):
     template_file = "page-loader.html"

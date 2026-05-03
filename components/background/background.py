@@ -22,7 +22,7 @@ class Background(Component):
         elif kwargs.variant == "bottom":
             variant_classes = (
                 "from-bg via-white to-bg rounded-t-2xl rounded-b-4xl "
-                "dark:from-blueiris dark:via-darkbg dark:to-blueiris"
+                "dark:from-darkbg dark:via-blueiris dark:to-darkbg"
             )
         else:
             variant_classes = ""

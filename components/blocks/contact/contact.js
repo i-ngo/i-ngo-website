@@ -1,9 +1,9 @@
 document.addEventListener('alpine:init', () => {
   Alpine.data('contactForm', () => ({
     formData: {
-        name: '',
-        email: '',
-        message: '',
+      name: '',
+      email: '',
+      message: '',
     },
     status: 'idle',
     errorMessage: '',

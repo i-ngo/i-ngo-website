@@ -9,11 +9,12 @@
   width: 100vw;
   height: 100vh;
   background-color: #ffffff;
+  /* Default light mode */
   z-index: 9999;
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: opacity 0.8s ease-in-out, visibility 0.8s ease-in-out;
+  transition: opacity 0.8s ease-in-out, visibility 0.8s ease-in-out, background-color 0.3s;
 }
 
 #page-loader-overlay.fade-out {
@@ -33,15 +34,32 @@
   stroke-dasharray: 20;
   stroke-dashoffset: 100;
   animation: draw 3s ease infinite;
-  transition: fill 1s ease-in-out, stroke-width 1s ease-in-out;
+  transition: fill 1s ease-in-out, stroke-width 1s ease-in-out, stroke 0.3s;
 }
 
 @keyframes draw {
-  0% { stroke-dashoffset: 100; }
-  100% { stroke-dashoffset: 0; }
+  0% {
+    stroke-dashoffset: 100;
+  }
+
+  100% {
+    stroke-dashoffset: 0;
+  }
 }
 
 .draw-svg.is-loaded path {
   fill: #241f31;
-  stroke-width: 0; 
+  stroke-width: 0;
+}
+
+.dark #page-loader-overlay {
+  background-color: #111827;
+}
+
+.dark .draw-svg path {
+  stroke: #ffffff;
+}
+
+.dark .draw-svg.is-loaded path {
+  fill: #ffffff;
 }

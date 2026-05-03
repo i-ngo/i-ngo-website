@@ -1,14 +1,16 @@
 {% load static tailwind_cli %}
 <!DOCTYPE html>
 <html lang="en" class="overflow-x-hidden">
+
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" /> <!-- Added max-scale to prevent zooming shifts -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+    <!-- Added max-scale to prevent zooming shifts -->
     <link rel="icon" type="image/x-icon" href="{% static 'images/favicon.ico' %}">
     <title>I-ngo - {% block title %}{% endblock %}</title>
-    
+
     {% tailwind_css %}
-    
+
     <style>
         @view-transition {
             navigation: auto;
@@ -17,7 +19,7 @@
 
     <script src="//unpkg.com/alpinejs" defer></script>
     <script>
-        (function() {
+        (function () {
             try {
                 const theme = localStorage.getItem('theme');
                 if (theme === 'dark' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
@@ -25,29 +27,30 @@
                 } else {
                     document.documentElement.classList.remove('dark');
                 }
-            } catch (e) {}
+            } catch (e) { }
         })();
     </script>
 </head>
 
 <body class="bg-white dark:bg-neutral-800 min-h-screen flex flex-col overflow-x-hidden w-full max-w-full select-none">
-	
-	{% component "page-loader" / %}
-	
+
+    {% component "page-loader" / %}
+
     {% component "navbar" current_path=request.path / %}
-    
+
     <main class="flex-1 flex flex-col w-full max-w-full overflow-x-hidden">
-       {% component "background" variant="bottom" class_name="flex flex-1 flex-col shadow-lg z-10 overflow-hidden" %}
-            
-            {% fill "content" %}
-                <div class="container mx-auto px-4 md:px-6 flex-1 w-full max-w-full">
-					<div class="pt-8 sm:pt-4 md:flex">
-                    {% block content %}
-                    {% endblock content %}
-                </div>
-                {% component "footer" / %}
+        {% component "background" variant="bottom" class_name="flex flex-1 flex-col shadow-lg z-10 overflow-hidden" %}
+
+        {% fill "content" %}
+        <div class="container mx-auto px-4 md:px-6 flex-1 w-full max-w-full">
+            <div class="pt-8">
+                {% block content %}
+                {% endblock content %}
+            </div>
+            {% component "footer" / %}
             {% endfill %}
-        {% endcomponent %}
+            {% endcomponent %}
     </main>
 </body>
+
 </html>
