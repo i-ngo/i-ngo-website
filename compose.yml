@@ -7,7 +7,7 @@ x-common-settings: &common-settings
     db:
       condition: service_healthy
   environment:
-    - "ALLOWED_HOSTS=i-ngo.fun,www.i-ngo.fun"
+    - "ALLOWED_HOSTS=i-ngo.fun,www.i-ngo.fun,127.0.0.1,localhost"
     - "CSRF_TRUSTED_ORIGINS=https://i-ngo.fun,https://i-ngo.fun"
     - "DATABASE_URL=postgres://postgres@db/postgres"
     - "DJANGO_DEBUG=false"
