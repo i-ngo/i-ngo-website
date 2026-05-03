@@ -16,7 +16,7 @@
 
         <div class="mt-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-4 lg:flex-nowrap">
           {% component "button" variant="shadow" as_child=True %}
-          <a href="projects/" class="w-fit">
+          <a href="{% url 'projects' %}" class="w-fit">
             Check out my projects
           </a>
           {% endcomponent %}
