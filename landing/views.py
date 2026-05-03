@@ -44,5 +44,4 @@ def contact_page(request):
 	return render(request, "contact.html")
 
 def page_not_found(request, exception):
-	attempted_url = request.path
-	return render(request, "404.html")
+    return render(request, "404.html", status=404)
