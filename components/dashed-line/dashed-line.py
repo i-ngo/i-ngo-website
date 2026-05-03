@@ -1,6 +1,5 @@
 from django_components import Component, register
 
-#TODO: Fix dark mode
 @register("dashed-line")
 class DashedLine(Component):
     template_file = "dashed-line.html"

@@ -1,6 +1,5 @@
 from django_components import Component, register
 
-# TODO: Fix Mobile issues
 @register("navbar")
 class Navbar(Component):
     template_name = "navbar.html"
