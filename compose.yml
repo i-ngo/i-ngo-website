@@ -9,7 +9,7 @@ x-common-settings: &common-settings
   environment:
     - "ALLOWED_HOSTS=*"
     - "DATABASE_URL=postgres://postgres@db/postgres"
-    - "DJANGO_DEBUG=true"
+    - "DJANGO_DEBUG=false"
     - "UV_PROJECT_ENVIRONMENT=/opt/venv"
   env_file: .env
   tty: true
