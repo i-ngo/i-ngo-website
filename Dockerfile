@@ -3,9 +3,10 @@
 # ------------------------------------------------------------
 FROM ghcr.io/astral-sh/uv:python3.13-bookworm-slim AS builder
 
-# Configure environment variables
 ENV UV_COMPILE_BYTECODE=1
 ENV UV_LINK_MODE=copy
+ENV VIRTUAL_ENV=/opt/venv
+ENV PATH="/opt/venv/bin:$PATH"
 # Put the project venv OUTSIDE of /src/ so the docker-compose host bind
 # mount (`.:/src:cache`) cannot shadow it at runtime. Without this,
 # `uv run` in the compose container finds no .venv and rebuilds it on
