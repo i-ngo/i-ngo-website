@@ -9,9 +9,9 @@ class Navbar(Component):
         current_path = kwargs.get("current_path", "/")
         
         items = [
-            {"label": "Feed", "href": "feed/"},
-            {"label": "Projects", "href": "projects/"},
-            {"label": "Contact", "href": "contact/"},
+            {"label": "Feed", "href": "/feed/"},
+            {"label": "Projects", "href": "/projects/"},
+            {"label": "Contact", "href": "/contact/"},
         ]
         
         return {
