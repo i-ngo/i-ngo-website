@@ -4,7 +4,7 @@ from landing.models import GithubHistory
 import requests
 
 def poll():
-	url = 'https://api.github.com/search/commits?q=author:i-ngo+is:public&sort=author-date&order=desc&per_page=25'
+	url = 'https://api.github.com/search/commits?q=author:i-ngo+is:public&sort=author-date&order=desc&per_page=50'
 	headers = {
 	"Accept": "application/vnd.github+json",
 	"Authorization": f"Bearer {settings.GIT_SECRET}"
