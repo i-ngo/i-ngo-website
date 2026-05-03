@@ -7,7 +7,8 @@ x-common-settings: &common-settings
     db:
       condition: service_healthy
   environment:
-    - "ALLOWED_HOSTS=*"
+    - "ALLOWED_HOSTS=i-ngo.fun,www.i-ngo.fun"
+    - "CSRF_TRUSTED_ORIGINS=https://i-ngo.fun,https://i-ngo.fun"
     - "DATABASE_URL=postgres://postgres@db/postgres"
     - "DJANGO_DEBUG=false"
     - "UV_PROJECT_ENVIRONMENT=/opt/venv"
@@ -18,17 +19,12 @@ x-common-settings: &common-settings
     - django-tailwind-cli-data:/src/.django_tailwind_cli
 
 services:
-
   db:
     environment:
       - "POSTGRES_HOST_AUTH_METHOD=trust"
       - "PGDATA=/var/lib/postgresql/data/pgdata"
     healthcheck:
-      # CMD-SHELL takes a single command string; passing args as extra list
-      # items silently drops them. Use the full command as one string.
       test: ["CMD-SHELL", "pg_isready -U postgres -d postgres -q"]
-      # `start_interval` (Docker 25+) lets us poll aggressively during boot
-      # and relax once the container is healthy.
       interval: 30s
       start_interval: 1s
       start_period: 20s
@@ -36,7 +32,6 @@ services:
       retries: 5
     image: "pgautoupgrade/pgautoupgrade:18.3-alpine"
     init: true
-    #user: postgres
     volumes:
       - .:/src:cache
       - postgres-data:/var/lib/postgresql/data/
@@ -60,14 +55,7 @@ services:
 
   utility:
     <<: *common-settings
-    command: [
-      "uv",
-      "run",
-      "--no-sync",
-      "-m",
-      "manage",
-      "--version"
-    ]
+    command: ["uv", "run", "--no-sync", "-m", "manage", "--version"]
     entrypoint: ["/src/compose-entrypoint.sh"]
 
   web:
@@ -81,8 +69,30 @@ services:
       timeout: 5s
       retries: 3
     init: true
+    expose:
+      - "8000"
+
+  nginx:
+    image: nginx:stable-alpine
+    depends_on:
+      web:
+        condition: service_started
     ports:
-      - "8000:8000"
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./deploy/nginx/conf.d:/etc/nginx/conf.d:ro
+      - ./deploy/certbot/www:/var/www/certbot
+      - ./deploy/certbot/conf:/etc/letsencrypt
+    restart: unless-stopped
+    init: true
+
+  certbot:
+    image: certbot/certbot:latest
+    profiles: ["ops"]
+    volumes:
+      - ./deploy/certbot/www:/var/www/certbot
+      - ./deploy/certbot/conf:/etc/letsencrypt
 
 volumes:
   django-tailwind-cli-data:
