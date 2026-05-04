@@ -2,10 +2,8 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, re_path, include
-
 from health_check.views import HealthCheckView
-from landing.views import page_not_found
-
+handler404 = "landing.views.page_not_found"
 urlpatterns = [
     path(settings.ADMIN_URL, admin.site.urls),
     path("__components__/", include("django_components.urls")),
@@ -21,7 +19,6 @@ urlpatterns = [
             ]
         ),
     ),
-    re_path(r"^.*$", page_not_found),
 ]
 
 if settings.DEBUG:
