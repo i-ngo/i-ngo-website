@@ -43,5 +43,5 @@ def projects_page(request):
 def contact_page(request):
 	return render(request, "contact.html")
 
-def page_not_found(request, exception):
+def page_not_found(request, exception=None):
     return render(request, "404.html", status=404)
