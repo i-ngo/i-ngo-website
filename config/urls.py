@@ -8,7 +8,7 @@ from landing.views import page_not_found
 
 urlpatterns = [
     path(settings.ADMIN_URL, admin.site.urls),
-    path("", include("django_components.urls")),
+    path("__components__/", include("django_components.urls"))
     path("", include("landing.urls")),
     path("feed/", include("landing.urls")),
     path("projects/", include("landing.urls")),
