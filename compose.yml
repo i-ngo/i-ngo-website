@@ -84,6 +84,7 @@ services:
       - ./deploy/nginx/conf.d:/etc/nginx/conf.d:ro
       - ./deploy/certbot/www:/var/www/certbot
       - ./deploy/certbot/conf:/etc/letsencrypt
+      - ./media:/media:ro
     restart: unless-stopped
     init: true
 
